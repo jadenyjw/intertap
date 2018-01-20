@@ -71,9 +71,8 @@ public class NFCActivity extends Activity implements NfcAdapter.CreateNdefMessag
     @Override
     public NdefMessage createNdefMessage(NfcEvent nfcEvent) {
 
-        String request = "6";
+        String request = mEditText.getText().toString();
         NdefRecord ndefRecord = NdefRecord.createMime("text/plain", request.getBytes());
-
         NdefMessage ndefMessage = new NdefMessage(ndefRecord);
         return ndefMessage;
     }
