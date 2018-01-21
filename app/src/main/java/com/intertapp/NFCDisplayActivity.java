@@ -3,8 +3,8 @@ package com.intertapp;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.nfc.NdefMessage;
-import android.nfc.NdefRecord;
 import android.nfc.NfcAdapter;
 import android.os.Build;
 import android.os.Bundle;
@@ -15,17 +15,18 @@ import android.widget.TextView;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Cache;
 import com.android.volley.Network;
+import com.android.volley.NetworkResponse;
+import com.android.volley.ParseError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.BasicNetwork;
 import com.android.volley.toolbox.DiskBasedCache;
+import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.RequestFuture;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -57,7 +58,7 @@ public class NFCDisplayActivity extends Activity {
         mTextView = (TextView) findViewById(R.id.text_view);
         TelephonyManager tMgr = (TelephonyManager) getApplicationContext().getSystemService(Context.TELEPHONY_SERVICE);
         String mPhoneNumber = tMgr.getLine1Number();
-        mTextView.setText(mPhoneNumber);
+        //mTextView.setText(mPhoneNumber);
         strippedPhone = mPhoneNumber.substring(1);
         System.out.println(strippedPhone);
 
@@ -109,6 +110,18 @@ public class NFCDisplayActivity extends Activity {
                                                 @Override
                                                 public void onResponse(JSONObject response) {
                                                     System.out.println(response.toString());
+                                                    String url;
+
+
+                                                    try {
+                                                        url = (String) response.get("paymentGatewayUrl");
+                                                        //Do something with URL
+                                                        Intent intent= new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                                                        startActivity(intent);
+
+                                                    } catch (JSONException e) {
+                                                        e.printStackTrace();
+                                                    }
 
                                                 }
                                             }, new Response.ErrorListener() {
@@ -117,9 +130,30 @@ public class NFCDisplayActivity extends Activity {
                                                 public void onErrorResponse(VolleyError error) {
                                                     // TODO Auto-generated method stub
                                                     //System.out.println(error.networkResponse.data);
-                                                    System.out.println("Error");
+                                                    System.out.println(error);
+                                                    /*
+                                                        try {
+                                                            final GZIPInputStream gStream = new GZIPInputStream(new ByteArrayInputStream(error.networkResponse.data));
+                                                            final InputStreamReader reader = new InputStreamReader(gStream);
+                                                            final BufferedReader in = new BufferedReader(reader);
+                                                            String read;
+                                                            String output = "";
+                                                            while ((read = in.readLine()) != null) {
+                                                                output += read;
+                                                            }
+                                                            reader.close();
+                                                            in.close();
+                                                            gStream.close();
+                                                            System.out.println(output);
+                                                        } catch (IOException e) {
+                                                            e.printStackTrace();
+                                                        }
+                                                        catch (NullPointerException e){
+                                                            e.printStackTrace();
+                                                        }
+                                                        */
+                                                    }
 
-                                                }
                                             }){
 
                                         @Override
@@ -129,7 +163,7 @@ public class NFCDisplayActivity extends Activity {
                                             params.put("Content-Type", "application/json");
                                             params.put("accessToken", "Bearer " + accessToken);
                                             System.out.println("Bearer " + accessToken);
-                                            params.put("Accept-Encoding", "gzip");
+                                            params.put("Accept-Encoding", "gzip,deflate");
                                             params.put("requestId", requestID);
                                             System.out.println(requestID);
                                             params.put("thirdPartyAccessId", accessID);
@@ -142,6 +176,33 @@ public class NFCDisplayActivity extends Activity {
                                             System.out.println(amount);
 
                                             return params;
+                                        }
+
+
+                                        @Override
+                                        protected Response<JSONObject> parseNetworkResponse(NetworkResponse response) {
+                                            String output = ""; // note: better to use StringBuilder
+                                            try {
+                                                final GZIPInputStream gStream = new GZIPInputStream(new ByteArrayInputStream(response.data));
+                                                final InputStreamReader reader = new InputStreamReader(gStream);
+                                                final BufferedReader in = new BufferedReader(reader);
+                                                String read;
+                                                while ((read = in.readLine()) != null) {
+                                                    output += read;
+                                                }
+                                                reader.close();
+                                                in.close();
+                                                gStream.close();
+                                            } catch (IOException e) {
+                                                output = response.data.toString();
+                                            }
+                                            JSONObject payload = null;
+                                            try {
+                                                payload = new JSONObject(output);
+                                            } catch (JSONException e) {
+                                                e.printStackTrace();
+                                            }
+                                            return Response.success(payload, HttpHeaderParser.parseCacheHeaders(response));
                                         }
                                     };
 
