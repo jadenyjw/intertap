@@ -1,6 +1,8 @@
 package com.intertapp;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.graphics.Typeface;
 import android.nfc.NdefMessage;
 import android.nfc.NdefRecord;
 import android.nfc.NfcAdapter;
@@ -39,7 +41,7 @@ import java.util.Map;
 
 public class NFCActivity extends Activity implements NfcAdapter.CreateNdefMessageCallback {
 
-    private EditText mEditText;
+    private EditText mEditText, amount;
     private final String accessID = "CA1TAaPamkkrCsZQ";
     private final String registration = "CA1AReggCJXVeGF2";
     private final String secretKey = "XyhKlB3ySVGpeNHAWR7XwkASvpiymC/Sr4GQDyZs+YM="; //lul
@@ -47,13 +49,20 @@ public class NFCActivity extends Activity implements NfcAdapter.CreateNdefMessag
     private String accessToken;
     private Button getStarted;
     private ImageButton backbutton;
+    private TextView instr;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nfc);
         mEditText = (EditText) findViewById(R.id.edit_text_field);
-
+        amount = (EditText) findViewById(R.id.edit_text_field);
+        instr = (TextView) findViewById(R.id.editText2);
+        Typeface face = Typeface.createFromAsset(getAssets(),
+                "fonts/futur.ttf");
+        mEditText.setTypeface(face);
+        amount.setTypeface(face);
+        instr.setTypeface(face);
         NfcAdapter mAdapter = NfcAdapter.getDefaultAdapter(this);
         if (mAdapter == null) {
             mEditText.setText("Sorry this device does not have NFC.");
@@ -71,14 +80,13 @@ public class NFCActivity extends Activity implements NfcAdapter.CreateNdefMessag
         backbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+            startActivity(new Intent(NFCActivity.this, MainActivity.class));
             }
         });
         getStarted.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-            EditText amount = (EditText) findViewById(R.id.edit_text_field);
-            TextView instr = (TextView) findViewById(R.id.editText2);
+
 
             amount.setVisibility(View.VISIBLE);
             instr.setVisibility(View.INVISIBLE);
