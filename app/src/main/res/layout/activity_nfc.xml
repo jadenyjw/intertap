@@ -17,8 +17,7 @@
         android:layout_height="50dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/editText3"
-        android:layout_marginTop="63dp"
+        android:layout_below="@+id/textView2"
         android:gravity="top|left"
         android:hint="Type in an Amount"
         android:lines="3"
@@ -26,27 +25,29 @@
         android:visibility="invisible" />
 
     <TextView
-        android:id="@+id/editText2"
+        android:id="@+id/textView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/edit_text_field"
-        android:layout_marginTop="73dp"
+        android:layout_above="@+id/textView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="34dp"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:singleLine="false"
-        android:text="Send money in an instant while you’re on the go" />
+        android:gravity="center"
+        android:text="Send money in an instant while"
+        android:textSize="10pt" />
 
-    <Button
-        android:id="@+id/button3"
-        android:layout_width="1000dp"
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/editText2"
-        android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/editText2"
-        android:text="Let's get started" />
-
+        android:layout_above="@+id/textView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:ems="10"
+        android:gravity="center"
+        android:text="you're on the go"
+        android:textSize="10pt" />
     <ImageButton
         android:id="@+id/imageButton2"
         android:layout_width="50dp"
@@ -60,13 +61,33 @@
         android:id="@+id/editText3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:layout_marginEnd="20dp"
-        android:layout_marginRight="20dp"
+        android:layout_centerHorizontal="true"
         android:ems="10"
         android:inputType="textPersonName"
+        android:gravity="center"
+        android:textSize="9pt"
         android:text="Send Money" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:gravity="center"
+        android:text="Pay back friends. Chip in for mom's gift. Settle up with your teammates right from your phone. Pay for your meals, yoga lesssons and dog walker, too." />
+
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="3000dp"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView2"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/textView2"
+        android:layout_weight="1"
+        android:text="Let's get started" />
 
 </RelativeLayout>
