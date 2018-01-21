@@ -3,6 +3,7 @@ package com.intertapp;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.nfc.NdefMessage;
 import android.nfc.NfcAdapter;
 import android.os.Build;
@@ -115,7 +116,9 @@ public class NFCDisplayActivity extends Activity {
                                                     try {
                                                         url = (String) response.get("paymentGatewayUrl");
                                                         //Do something with URL
-                                                        
+                                                        Intent intent= new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                                                        startActivity(intent);
+
                                                     } catch (JSONException e) {
                                                         e.printStackTrace();
                                                     }
