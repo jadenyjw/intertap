@@ -17,32 +17,22 @@
         android:layout_height="50dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/button2"
-        android:layout_marginTop="51dp"
+        android:layout_below="@+id/editText3"
+        android:layout_marginTop="63dp"
         android:gravity="top|left"
         android:hint="Type in an Amount"
         android:lines="3"
         android:textSize="32sp"
         android:visibility="invisible" />
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/edit_text_field"
-        android:layout_centerHorizontal="true"
-        android:src="@drawable/send" />
-
-    <EditText
+    <TextView
         android:id="@+id/editText2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/imageView"
-        android:layout_marginLeft="18dp"
-        android:layout_marginStart="18dp"
-        android:layout_marginTop="18dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/edit_text_field"
+        android:layout_marginTop="73dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:singleLine="false"
@@ -58,12 +48,25 @@
         android:text="Let's get started" />
 
     <ImageButton
-        android:id="@+id/imageButton"
+        android:id="@+id/imageButton2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:src="@drawable/backbut" />
+
+    <TextView
+        android:id="@+id/editText3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Send Money" />
 
 </RelativeLayout>

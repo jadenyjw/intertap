@@ -8,7 +8,10 @@ import android.nfc.NfcEvent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,6 +45,8 @@ public class NFCActivity extends Activity implements NfcAdapter.CreateNdefMessag
     private final String secretKey = "XyhKlB3ySVGpeNHAWR7XwkASvpiymC/Sr4GQDyZs+YM="; //lul
     private final String salt = "uthacks";
     private String accessToken;
+    private Button getStarted;
+    private ImageButton backbutton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +65,26 @@ public class NFCActivity extends Activity implements NfcAdapter.CreateNdefMessag
         }
 
         mAdapter.setNdefPushMessageCallback(this, this);
+        backbutton = (ImageButton) findViewById(R.id.imageButton2);//get id of button 1
+        getStarted = (Button) findViewById(R.id.button3);//get id of button 2
 
+        backbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+        getStarted.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+            EditText amount = (EditText) findViewById(R.id.edit_text_field);
+            TextView instr = (TextView) findViewById(R.id.editText2);
+
+            amount.setVisibility(View.VISIBLE);
+            instr.setVisibility(View.INVISIBLE);
+            getStarted.setVisibility(View.INVISIBLE);
+            }
+        });
     }
 
     /**
@@ -76,4 +100,6 @@ public class NFCActivity extends Activity implements NfcAdapter.CreateNdefMessag
         NdefMessage ndefMessage = new NdefMessage(ndefRecord);
         return ndefMessage;
     }
+
+
 }
