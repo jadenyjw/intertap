@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:background="#FFFFFF"
+    android:background="@drawable/gradient"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
@@ -18,10 +18,12 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/textView2"
-        android:gravity="top|left"
+        android:gravity="top|right"
+        android:textColorHint="#FFFFFF"
         android:hint="Type in an Amount"
         android:lines="3"
         android:textSize="32sp"
+        android:textColor="#FFFFFF"
         android:visibility="invisible" />
 
     <TextView
@@ -34,7 +36,8 @@
         android:layout_marginBottom="34dp"
         android:ems="10"
         android:gravity="center"
-        android:text="Send money in an instant while"
+        android:textColor="#FFFFFF"
+        android:text="Request money in an instant while"
         android:textSize="10pt" />
 
     <TextView
@@ -45,6 +48,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:ems="10"
+        android:textColor="#FFFFFF"
         android:gravity="center"
         android:text="you're on the go"
         android:textSize="10pt" />
@@ -55,6 +59,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
+        android:textColor="#FFFFFF"
         android:src="@drawable/new_arrow64" />
 
     <TextView
@@ -66,8 +71,9 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:gravity="center"
+        android:textColor="#FFFFFF"
         android:textSize="9pt"
-        android:text="Send Money" />
+        android:text="Request Money" />
 
     <TextView
         android:id="@+id/textView"
@@ -77,6 +83,7 @@
         android:layout_alignParentStart="true"
         android:layout_centerVertical="true"
         android:gravity="center"
+        android:textColor="#FFFFFF"
         android:text="Pay back friends. Chip in for mom's gift. Settle up with your teammates right from your phone. Pay for your meals, yoga lesssons and dog walker, too." />
 
 
@@ -86,6 +93,7 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/textView2"
         android:layout_alignParentBottom="true"
+        android:textColor="#FFFFFF"
         android:layout_alignStart="@+id/textView2"
         android:layout_weight="1"
         android:text="Let's get started" />
